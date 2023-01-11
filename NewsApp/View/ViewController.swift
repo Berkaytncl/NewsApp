@@ -20,12 +20,15 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        
         self.navigationItem.title = "News"
         
         let appearance = UINavigationBarAppearance()
         
         appearance.backgroundColor = UIColor(named: "mainColor")
-        appearance.titleTextAttributes = [.foregroundColor:UIColor(named: "foregroundColor1")!, .font:UIFont(name: "Newsreader-Bold", size: 24)!]
+        appearance.titleTextAttributes = [.foregroundColor:UIColor(named: "foregroundColor")!, .font:UIFont(name: "Newsreader-Bold", size: 24)!]
         
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.standardAppearance = appearance
@@ -33,6 +36,7 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         takeData()
+        
     }
     
     func takeData() {
@@ -51,6 +55,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsTableViewModel == nil ? 0 : self.newsTableViewModel!.numberOfRowsInSection()
     }
@@ -63,4 +68,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
